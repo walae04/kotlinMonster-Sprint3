@@ -16,11 +16,6 @@ var espece6 = EspeceMonster(13,"Galum","Minéral",12,15,6,8,12,55,9.0,13.0,4.0,6
 
 var route1 = Zone(1,"Zone A",2500,mutableListOf(espece1,espece2,espece3),null,null)
 var route2 = Zone(2,"Zone B",2000,mutableListOf(espece4,espece5,espece6),null,null)
-
-val espece7 = IndividuMonstre(1, "springleaf", 1500.0, especeSpringLeaf)
-val espece8 = IndividuMonstre(2, "flamkip", 1500.0, especeFlamkip)
-val espece9 = IndividuMonstre(3, "aquamy", 1500.0, especeAquamy)
-
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
