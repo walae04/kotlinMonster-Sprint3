@@ -5,11 +5,12 @@ import kotlin.random.Random
 import kotlin.math.pow
 import kotlin.math.round
 
-class IndividuMonstre(expInit: Double,
+class IndividuMonstre(
                       var id: Int,
                       var nom: String,
                       var espece: EspeceMonster,
-                      var entraineur: Entraineur?
+                      var entraineur: Entraineur?,
+                      expInit: Double
 ) {
     var niveau: Int = 1
     var attaque: Int = espece.baseAttaque + Random.nextInt(-2, 2)
@@ -29,9 +30,9 @@ class IndividuMonstre(expInit: Double,
             var estNiveau1 = (niveau == 1)
 
             // Vérifier si palier atteint
-            if (field >= palierExp(niveau)) {
+            while (field >= palierExp(niveau)) {
                 levelUp()
-                estNiveau1 = false
+
 
                 // Affichage uniquement si pas niveau 1
                 if (!estNiveau1) {
@@ -57,7 +58,7 @@ class IndividuMonstre(expInit: Double,
      * @return Expérience cumulée nécessaire pour atteindre ce niveau.
      */
     fun palierExp(niveau: Int): Double {
-        return (100.0 * (niveau - 1)).pow(2)
+        return 100.0 * (niveau - 1).toDouble().pow(2)
     }
     /**
     * Augmenter de niveau un monstre, c'est-à-dire incrémenté le niveau, mais également calculer les nouvelles valeurs des caractéristiques (atq, def, vitesse, atqSpe, defSpe, et pvMax)
@@ -65,12 +66,42 @@ class IndividuMonstre(expInit: Double,
      *
      **/
     fun levelUp(){
+        niveau+=1
         attaque= round(attaque*potentiel).toInt()+ Random.nextInt(-2,2)
         defense= round(defense*potentiel).toInt()+ Random.nextInt(-2,2)
         vitesse= round(vitesse*potentiel).toInt()+ Random.nextInt(-2,2)
         attaqueSpe= round(attaqueSpe*potentiel).toInt()+ Random.nextInt(-2,2)
         defenseSpe= round(defenseSpe*potentiel).toInt()+ Random.nextInt(-2,2)
         pvMax= round(pvMax*potentiel).toInt()+ Random.nextInt(-5,5)
+
+    }
+    /**
+     * Attaque un autre [IndividuMonstre] et inflige des dégâts.
+     *
+     * Les dégâts sont calculés de manière très simple pour le moment :
+     * `dégâts = attaque - (défense / 2)` (minimum 1 dégât).
+     *
+     * @param cible Monstre cible de l'attaque.
+     */
+
+    fun attaquer(monstre: IndividuMonstre){
+        var degatBrut=this.attaque
+        var degatTotal=degatBrut-(this.defense/2)
+        if (degatTotal<1) degatTotal=1
+        var pvAvant=monstre.pv
+        monstre.pv-=degatTotal
+        var pvApres=monstre.pv
+        println("$nom inflige ${pvAvant-pvApres}dégats à ${monstre.nom}")
+
+
+    }
+
+    override fun toString(): String {
+        val textePresentation=
+            "-Nom : ${nom}\n - Espece : ${espece.nom}\n - Point de vie : ${pv}\n - Point de vie max : ${pvMax}\n"
+            "- Attaque : ${attaque}\n - Defense : ${defense}\n - Vitesse : ${vitesse}\n"
+            "-AttaqueSpe : ${attaqueSpe}\n - Defense : ${defenseSpe}\n- Potentiel : ${potentiel}\n"
+            return textePresentation
 
     }
 }
