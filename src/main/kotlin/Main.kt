@@ -1,8 +1,10 @@
 package org.example
 import org.example.dresseur.Entraineur
+import org.example.item.Badge
 import org.example.monde.Zone
 import org.example.monstre.EspeceMonster
 import org.example.monstre.IndividuMonstre
+
 
 
 var joueur = Entraineur(1,"Sacha",100)
@@ -20,6 +22,8 @@ var route2 = Zone(2,"Zone B",2000,mutableListOf(espece4,espece5,espece6),null,nu
 val monstre1 = IndividuMonstre(1, "springleaf", especeSpringLeaf,null,1500.0)
 val monstre2 = IndividuMonstre(2, "flamkip", especeFlamkip,null,1500.0)
 val monstre3 = IndividuMonstre(3, "aquamy", especeAquamy,null,1500.0)
+
+//val badgePierre= Badge(1,"Badge Roche","Badge gagné lorsque le joueur..."5)
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
@@ -41,8 +45,18 @@ fun main() {
     println(espece6.afficheArt())
     //t
 
+    //println(monstre2)
+    //monstre2.renommer()
+    //println(monstre2)
 
+    println("=== Détail du monstre 1 ===")
+    monstre1.afficherDetail()
+    println("=== Détail du monstre 2 ===")
+    monstre2.afficherDetail()
+    println("=== Détail du monstre 3 ===")
+    monstre3.afficherDetail()
 
+//println(badgePierre)
 }
 /**
  * Change la couleur du message donné selon le nom de la couleur spécifié.

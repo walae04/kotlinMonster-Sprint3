@@ -67,12 +67,12 @@ class IndividuMonstre(
      **/
     fun levelUp(){
         niveau+=1
-        attaque= round(attaque*potentiel).toInt()+ Random.nextInt(-2,2)
-        defense= round(defense*potentiel).toInt()+ Random.nextInt(-2,2)
-        vitesse= round(vitesse*potentiel).toInt()+ Random.nextInt(-2,2)
-        attaqueSpe= round(attaqueSpe*potentiel).toInt()+ Random.nextInt(-2,2)
-        defenseSpe= round(defenseSpe*potentiel).toInt()+ Random.nextInt(-2,2)
-        pvMax= round(pvMax*potentiel).toInt()+ Random.nextInt(-5,5)
+        attaque= round(this.espece.modAttaque*potentiel).toInt()+ Random.nextInt(-2,2)
+        defense= round(this.espece.modDefense*potentiel).toInt()+ Random.nextInt(-2,2)
+        vitesse= round(this.espece.modVitesse*potentiel).toInt()+ Random.nextInt(-2,2)
+        attaqueSpe= round(this.espece.modAttaqueSpe*potentiel).toInt()+ Random.nextInt(-2,2)
+        defenseSpe= round(this.espece.modDefenseSpe*potentiel).toInt()+ Random.nextInt(-2,2)
+        pvMax= round(this.espece.modPv*potentiel).toInt()+ Random.nextInt(-5,5)
 
     }
     /**
@@ -95,14 +95,45 @@ class IndividuMonstre(
 
 
     }
+    /**
+     * Demande au joueur de renommer le monstre.
+     * Si l'utilisateur entre un texte vide, le nom n'est pas modifié.
+     */
+    fun renommer(){
+        println("Renommer $nom")
+       var nouveauNom= readln().toString()
+        if (nouveauNom!="") this.nom=nouveauNom
 
-    override fun toString(): String {
-        val textePresentation=
-            "-Nom : ${nom}\n - Espece : ${espece.nom}\n - Point de vie : ${pv}\n - Point de vie max : ${pvMax}\n"
-            "- Attaque : ${attaque}\n - Defense : ${defense}\n - Vitesse : ${vitesse}\n"
-            "-AttaqueSpe : ${attaqueSpe}\n - Defense : ${defenseSpe}\n- Potentiel : ${potentiel}\n"
-            return textePresentation
+    }
+    fun afficherDetail() {
+        val art = espece.afficheArt()
+        val lignes = art.lines()
+        val details = listOf(
+            "Nom : ${nom}",
+            "niveau : ${niveau}",
+            "Pv : ${pv / pvMax}",
+            "Exp : ${exp}",
+            "Atq : ${attaque}",
+            "Def : ${defense}",
+            "Vitesse : ${vitesse}",
+            "AtqSpe : ${attaqueSpe}",
+            "DefSpe : ${defenseSpe}"
+        )
+        val maxArtWidth = lignes.maxOfOrNull { it.length } ?: 0
+        val maxLines = maxOf(lignes.size, details.size)
+        for (i in 0 until maxLines) {
+            val artLine = if (i < lignes.size) lignes[i] else ""
+            val detailLine = if (i < details.size) details[i] else ""
+            val paddedArt = artLine.padEnd(maxArtWidth + 4)
 
+            println(paddedArt + detailLine)
+        }
     }
 }
 
+//override fun toString(): String {
+//    val textePresentation=
+//       "-Nom : ${nom}\n - Espece : ${espece.nom}\n - Niveau : ${niveau}\n - Point de vie : ${pv}\n - Point de vie max : ${pvMax}\n"+
+//      "- Attaque : ${attaque}\n - Defense : ${defense}\n - Vitesse : ${vitesse}\n"+
+//       "-AttaqueSpe : ${attaqueSpe}\n - Defense : ${defenseSpe}\n- Potentiel : ${potentiel}\n"
+//     return textePresentation
