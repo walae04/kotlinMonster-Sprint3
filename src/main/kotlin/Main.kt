@@ -1,6 +1,7 @@
 package org.example
 import org.example.dresseur.Entraineur
 import org.example.item.Badge
+import org.example.item.MonsterKube
 import org.example.monde.Zone
 import org.example.monstre.EspeceMonster
 import org.example.monstre.IndividuMonstre
@@ -23,6 +24,7 @@ val monstre1 = IndividuMonstre(1, "springleaf", especeSpringLeaf,null,1500.0)
 val monstre2 = IndividuMonstre(2, "flamkip", especeFlamkip,null,1500.0)
 val monstre3 = IndividuMonstre(3, "aquamy", especeAquamy,null,1500.0)
 
+val monstreKube= MonsterKube(1,"spring","strong",10.2)
 //val badgePierre= Badge(1,"Badge Roche","Badge gagné lorsque le joueur..."5)
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.

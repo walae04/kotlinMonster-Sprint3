@@ -1,5 +1,6 @@
 package org.example.monde
 
+import org.example.dresseur.Entraineur
 import org.example.monstre.EspeceMonster
 
 class Zone(var id: Int,
@@ -8,7 +9,17 @@ class Zone(var id: Int,
            var especesMonstres : MutableList <EspeceMonster> = mutableListOf<EspeceMonster>(),
            var zoneSuivante : Zone? ,
            var zonePrecedente : Zone?
-//TODO : -faire la méthode genereMonstre()
-    //TODO : -faire la méthode rencontreMonstre()
-    ) {
+    //TODO rencontreMonstre()
+
+) {
+
+    fun genereMonstre() {
+        var id: Int
+        var espece: String
+        var nom: String
+        var entraineur: Entraineur?
+        var expInit: Double
+
+
+    }
 }
