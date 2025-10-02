@@ -4,6 +4,7 @@ import org.example.item.Badge
 import org.example.item.MonsterKube
 import org.example.jeu.Partie
 import org.example.monde.Zone
+import org.example.monstre.Element
 import org.example.monstre.EspeceMonster
 import org.example.monstre.IndividuMonstre
 
@@ -39,9 +40,46 @@ fun nouvellePartie(): Partie {
     var nouvelleGame: Partie = Partie(1, joueur, route1)
     return nouvelleGame
 }
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+// 🔥🌱💧🐞🪨⚪ Variables globales
+val feu = Element(1, "Feu 🔥")
+val plante = Element(2, "Plante 🌱")
+val eau = Element(3, "Eau 💧")
+val insecte = Element(4, "Insecte 🐞")
+val roche = Element(5, "Roche 🪨")
+val normal = Element(6, "Normal ⚪")
 fun main() {
+    // 🔥 Feu
+    feu.forces.addAll(listOf(plante, insecte, roche))
+    feu.faiblesses.add(eau)
+    // Pas d’immunité particulière pour Feu
+
+    // 🌱 Plante
+    plante.forces.addAll(listOf(eau, roche))
+    plante.faiblesses.add(feu)
+    // Pas d’immunité particulière pour Plante
+
+    // 💧 Eau
+    eau.forces.addAll(listOf(feu, roche))
+    eau.faiblesses.add(plante)
+
+    // 🐞 Insecte
+    insecte.forces.addAll(listOf(plante))
+    insecte.faiblesses.addAll(listOf(feu, roche))
+
+    // 🪨 Roche
+    roche.forces.addAll(listOf(insecte, feu))
+    roche.faiblesses.add(eau)
+
+    // ⚪ Normal
+    normal.faiblesses.add(roche)
+
+    println("${especeSpringLeaf.nom} (${especeSpringLeaf.elements[0].nom}) attaque ${especeAquamy.nom} : efficacité = ${especeSpringLeaf.elements[0].efficaciteContre(especeAquamy.elements[0])}")
+
+
+
+
+
+
     route1.zoneSuivante = route2
     route2.zonePrecedente = route1
     joueur.sacAItems.add(kube1)

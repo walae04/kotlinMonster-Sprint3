@@ -48,6 +48,7 @@ class EspeceMonster(
     val caractères: String = ""
     ) {
 
+    val elements: MutableList<Element> = mutableListOf<Element>()
 
     /**
      * Affiche la représentation artistique ASCII du monstre.
