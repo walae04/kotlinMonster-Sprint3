@@ -2,6 +2,7 @@ package org.example
 import org.example.dresseur.Entraineur
 import org.example.item.Badge
 import org.example.item.MonsterKube
+import org.example.jeu.Partie
 import org.example.monde.Zone
 import org.example.monstre.EspeceMonster
 import org.example.monstre.IndividuMonstre
@@ -26,37 +27,57 @@ val monstre3 = IndividuMonstre(3, "aquamy", especeAquamy,null,1500.0)
 
 val monstreKube= MonsterKube(1,"spring","strong",10.2)
 //val badgePierre= Badge(1,"Badge Roche","Badge gagné lorsque le joueur..."5)
+
+
+var kube1 = MonsterKube(1, "le kube", "kube de capture", 50.0)
+
+fun nouvellePartie(): Partie {
+    println("Bonjour et bienvenu !! \n Quel est votre nom ?")
+    var nomJoueur = readln()
+    joueur.nom = nomJoueur
+
+    var nouvelleGame: Partie = Partie(1, joueur, route1)
+    return nouvelleGame
+}
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    println(monstre1)
-    monstre2.attaquer(monstre1)
-    println(monstre1)
-    //monstre2.pv-=2688
-    //println(monstre2)
-
     route1.zoneSuivante = route2
     route2.zonePrecedente = route1
+    joueur.sacAItems.add(kube1)
 
+    val partie = nouvellePartie()
+    partie.choixStarter()
+    partie.jouer()
 
-    println(especeSpringLeaf.afficheArt())
-    println(especeFlamkip.afficheArt())
-    println(especeAquamy.afficheArt())
-    println(espece4.afficheArt())
-    println(espece5.afficheArt())
-    println(espece6.afficheArt())
-    //t
-
-    //println(monstre2)
-    //monstre2.renommer()
-    //println(monstre2)
-
-    println("=== Détail du monstre 1 ===")
-    monstre1.afficherDetail()
-    println("=== Détail du monstre 2 ===")
-    monstre2.afficherDetail()
-    println("=== Détail du monstre 3 ===")
-    monstre3.afficherDetail()
+//    println(monstre1)
+//    monstre2.attaquer(monstre1)
+//    println(monstre1)
+//    //monstre2.pv-=2688
+//    //println(monstre2)
+//
+//    route1.zoneSuivante = route2
+//    route2.zonePrecedente = route1
+//
+//
+//    println(especeSpringLeaf.afficheArt())
+//    println(especeFlamkip.afficheArt())
+//    println(especeAquamy.afficheArt())
+//    println(espece4.afficheArt())
+//    println(espece5.afficheArt())
+//    println(espece6.afficheArt())
+//    //t
+//
+//    //println(monstre2)
+//    //monstre2.renommer()
+//    //println(monstre2)
+//
+//    println("=== Détail du monstre 1 ===")
+//    monstre1.afficherDetail()
+//    println("=== Détail du monstre 2 ===")
+//    monstre2.afficherDetail()
+//    println("=== Détail du monstre 3 ===")
+//    monstre3.afficherDetail()
 
 //println(badgePierre)
 }
