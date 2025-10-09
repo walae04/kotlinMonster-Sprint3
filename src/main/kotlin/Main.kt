@@ -19,8 +19,8 @@ var espece4 = EspeceMonster(8,"Laoumi","Animal",11,10,9,8,11,58,11.0,8.0,7.0,6.0
 var espece5 = EspeceMonster(10,"Bugsyface","Insecte",10,13,8,7,13,45,7.0,11.0,6.5,8.0,11.5,21.0,"Insecte à carapace luisante, se déplace par bonds et vibre des antennes.","Sa carapace devient plus dure après chaque mue.","Travailleur, sociable, infatigable")
 var espece6 = EspeceMonster(13,"Galum","Minéral",12,15,6,8,12,55,9.0,13.0,4.0,6.5,10.5,13.0,"Golem ancien de pierre, yeux lumineux en garde.","Peut rester immobile des heures comme une statue.","Sérieux, stoïque, fiable")
 
-var route1 = Zone(1,"Zone A",2500,mutableListOf(especeSpringLeaf,especeFlamkip,especeAquamy),null,null)
-var route2 = Zone(2,"Zone B",2000,mutableListOf(espece4,espece5,espece6),null,null)
+var route1 = Zone(1,"Zone A",600,mutableListOf(especeSpringLeaf,especeFlamkip,especeAquamy),null,null)
+var route2 = Zone(2,"Zone B",1000,mutableListOf(espece4,espece5,espece6),null,null)
 
 val monstre1 = IndividuMonstre(1, "springleaf", especeSpringLeaf,null,1500.0)
 val monstre2 = IndividuMonstre(2, "flamkip", especeFlamkip,null,1500.0)
@@ -48,7 +48,7 @@ val insecte = Element(4, "Insecte 🐞")
 val roche = Element(5, "Roche 🪨")
 val normal = Element(6, "Normal ⚪")
 fun main() {
-    // 🔥 Feu
+ /*   // 🔥 Feu
     feu.forces.addAll(listOf(plante, insecte, roche))
     feu.faiblesses.add(eau)
     // Pas d’immunité particulière pour Feu
@@ -74,7 +74,7 @@ fun main() {
     normal.faiblesses.add(roche)
 
     println("${especeSpringLeaf.nom} (${especeSpringLeaf.elements[0].nom}) attaque ${especeAquamy.nom} : efficacité = ${especeSpringLeaf.elements[0].efficaciteContre(especeAquamy.elements[0])}")
-
+*/
 
 
 

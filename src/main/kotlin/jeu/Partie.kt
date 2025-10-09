@@ -1,6 +1,8 @@
 package org.example.jeu
 
 import org.example.dresseur.Entraineur
+import org.example.especeAquamy
+import org.example.especeFlamkip
 import org.example.especeSpringLeaf
 import org.example.monde.Zone
 import org.example.monstre.IndividuMonstre
@@ -13,8 +15,8 @@ class Partie (
 
     fun choixStarter() {
         var starter1 = IndividuMonstre(1, "springleaf", especeSpringLeaf, null, 1500.0)
-        var starter2 = IndividuMonstre(2, "flamkip", especeSpringLeaf, null, 1500.0)
-        var starter3 = IndividuMonstre(3, "aquamy", especeSpringLeaf, null, 1500.0)
+        var starter2 = IndividuMonstre(2, "flamkip", especeFlamkip, null, 1500.0)
+        var starter3 = IndividuMonstre(3, "aquamy", especeAquamy, null, 1500.0)
         var starter: IndividuMonstre? = null
 
         starter1.afficherDetail()
@@ -67,8 +69,8 @@ class Partie (
         }
         println()
         println(
-            "Menu principal : q" +
-                    "Modifier l'ordre des monstres : m" +
+            "Menu principal : q\n" +
+                    "Modifier l'ordre des monstres : m\n" +
                     "Tapez le numéro du monstre pour voir les détails :"
         )
 
@@ -86,23 +88,26 @@ class Partie (
 
 
     fun jouer() {
-        println(
-            "Vous ete actuellement dans la zone : ${zone.nom}. Vous pouvez :\n" +
-                    "1. Rencontrer un monstre sauvage\n" +
-                    "2. Examiner l'equipe de monstres\n"
-        )
-        if (zone.zoneSuivante != null) println("3. Aller a la zone suivante")
-        if (zone.zonePrecedente != null) println("3. Retourner a la zone precedente")
+        while (true) {
+            print(
+                "Vous ete actuellement dans la zone : ${zone.nom}. Vous pouvez :\n" +
+                        "1. Rencontrer un monstre sauvage\n" +
+                        "2. Examiner l'equipe de monstres\n"
+            )
+            if (zone.zoneSuivante != null) println("3. Aller a la zone suivante")
+            if (zone.zonePrecedente != null) println("4. Retourner a la zone precedente")
 
-        var action = readln().toInt()
+            var action = readln().toInt()
 
-        when (action) {
-            1 -> jouer()
-            2 -> examineEquipe()
-            3 -> zone = zone.zoneSuivante!!
-            4 -> zone = zone.zonePrecedente!!
+            when (action) {
+                1 -> zone.rencontreMonstre()
+                2 -> examineEquipe()
+                3 -> zone = zone.zoneSuivante!!
+                4 -> zone = zone.zonePrecedente!!
 
-            else -> println("entré invalide")
+                else -> println("entré invalide")
+            }
         }
     }
+
 }

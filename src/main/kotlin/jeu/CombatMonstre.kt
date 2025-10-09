@@ -81,11 +81,11 @@ class CombatMonstre(var monstreJoueur: IndividuMonstre,
     fun afficherCombat() {
         println("======== Début Round : ${round} ========\n" +
                 "Niveau : ${monstreSauvage.pvMax}\n" +
-                "Pv : ${monstreSauvage.pv / monstreSauvage.pvMax}\n" +
+                "Pv : ${monstreSauvage.pv} / ${monstreSauvage.pvMax}\n" +
                 monstreSauvage.espece.afficheArt(true) +
                 monstreJoueur.espece.afficheArt(false) +
                 "Niveau : ${monstreJoueur.niveau}\n" +
-                "Pv : ${monstreJoueur.pv / monstreJoueur.pvMax}")
+                "Pv : ${monstreJoueur.pv} / ${monstreJoueur.pvMax}")
     }
     fun jouer() {
 
@@ -98,7 +98,6 @@ class CombatMonstre(var monstreJoueur: IndividuMonstre,
             actionAdversaire()
             if (gameOver() == false) actionJoueur()
         }
-        return
     }
     /**
      * Lance le combat et gère les rounds jusqu'à la victoire ou la défaite.
