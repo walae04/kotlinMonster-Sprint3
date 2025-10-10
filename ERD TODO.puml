@@ -44,7 +44,8 @@ entity "Zone" as Zone {
 }
 
 entity "Zone_EspeceMonstre" as Zone_EspeceMonstre {
-TODO
+    fk_zone_id: INT <<PK>><<FK>>
+    fk_espece_monstre_id: INT <<PK>><<FK>>
 }
 
 entity "IndividuMonstre" as IndividuMonstre {
@@ -74,6 +75,7 @@ entity "IndividuMonstre" as IndividuMonstre {
 Entraineur ||--o{ IndividuMonstre : "possède (équipe)"
 Entraineur ||--o{ IndividuMonstre : "possède (boîte)"
 EspeceMonstre ||--o{ IndividuMonstre : "appartient à"
-'TODO
+EspeceMonstre ||--o{ Zone_EspeceMonstre : <<FK>>
+Zone ||--o{ Zone_EspeceMonstre : <<FK>>
 
 @enduml
