@@ -92,3 +92,11 @@ VALUES
      'Un golem ancien sculpté dans la pierre. Ses yeux s’illuminent d’une lueur mystérieuse quand il se met en garde.',
      'Peut rester immobile pendant des heures, le faisant passer pour une statue.',
      'Sérieux, stoïque, fiable.');
+
+Insert into IndividusMonstre(nom,niveau,attaque,defense,vitesse,attaqueSpe,defenseSpe,pvMax,potentiel,exp,pv,espece_id,entraineur_equipe_id)
+values ('springleaf',5, 30, 25, 20, 15, 20, 50, 0.8, 100, 50, 1, 2),
+       ('aquamy', 7, 35, 30, 22, 25, 20, 55, 0.9, 200, 55, 7, 1),
+       ('bugsyface', 6, 28, 20, 35, 18, 15, 48, 0.7, 150, 48,10 , 1),
+       ('galum', 8, 40, 35, 25, 20, 30, 60, 0.95, 300, 60, 4, 3),
+       ('flamkip', 9, 45, 30, 28, 35, 25, 65, 1.0, 400, 65, 13, 3);
+

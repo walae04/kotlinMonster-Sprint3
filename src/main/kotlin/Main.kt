@@ -1,7 +1,10 @@
 package org.example
+import org.example.DAO.EntraineurDAO
+import org.example.DAO.EspeceMonsterDAO
 import org.example.dresseur.Entraineur
 import org.example.item.Badge
 import org.example.item.MonsterKube
+import org.example.jdbc.BDD
 import org.example.jeu.Partie
 import org.example.monde.Zone
 import org.example.monstre.Element
@@ -12,9 +15,9 @@ import org.example.monstre.IndividuMonstre
 
 var joueur = Entraineur(1,"Sacha",100)
 var rival = Entraineur(2,"Regis",200)
-var especeSpringLeaf = EspeceMonster(1,	"Springleaf",	"Graine",	9,	11	,11,	12	,14,	60,	6.5,9.0,8.0,	7.0,	10.0,	34.0,"Petit monstre espiègle rond comme une graine, adore le soleil.",	"Sa feuille sur la tête indique son humeur.",	"Curieux, amical, timide")
+var especeSpringLeaf = EspeceMonster(1,	"Springleaf",	"Arbre",	9,	11	,11,	12	,14,	60,	6.5,9.0,8.0,	7.0,	10.0,	34.0,"Petit monstre espiègle rond comme une graine, adore le soleil.",	"Sa feuille sur la tête indique son humeur.",	"Curieux, amical, timide")
 var especeFlamkip = EspeceMonster(4,"Flamkip","animal",12,8,13,16,7,50,10.0,5.5,9.5,9.5,6.5,22.0,"Petit animal entouré de flammes, déteste le froid.","Sa flamme change d’intensité selon son énergie.","Impulsif, joueur, loyal")
-var especeAquamy = EspeceMonster(7,"Aquamy","Meteo",10,11,9,14,14,55,9.0,10.0,7.5,12.0,12.0,27.0,"Créature vaporeuse semblable à un nuage, produit des gouttes pures.","Fait baisser la température en s’endormant.","Calme, rêveur, mystérieux")
+var especeAquamy = EspeceMonster(7,"Aquamy","nuage",10,11,9,14,14,55,9.0,10.0,7.5,12.0,12.0,27.0,"Créature vaporeuse semblable à un nuage, produit des gouttes pures.","Fait baisser la température en s’endormant.","Calme, rêveur, mystérieux")
 var espece4 = EspeceMonster(8,"Laoumi","Animal",11,10,9,8,11,58,11.0,8.0,7.0,6.0,11.5,23.0,"Petit ourson au pelage soyeux, aime se tenir debout.","Son grognement est mignon mais il protège ses amis.","Affectueux, protecteur, gourmand")
 var espece5 = EspeceMonster(10,"Bugsyface","Insecte",10,13,8,7,13,45,7.0,11.0,6.5,8.0,11.5,21.0,"Insecte à carapace luisante, se déplace par bonds et vibre des antennes.","Sa carapace devient plus dure après chaque mue.","Travailleur, sociable, infatigable")
 var espece6 = EspeceMonster(13,"Galum","Minéral",12,15,6,8,12,55,9.0,13.0,4.0,6.5,10.5,13.0,"Golem ancien de pierre, yeux lumineux en garde.","Peut rester immobile des heures comme une statue.","Sérieux, stoïque, fiable")
@@ -38,6 +41,9 @@ fun nouvellePartie(): Partie {
     joueur.nom = nomJoueur
 
     var nouvelleGame: Partie = Partie(1, joueur, route1)
+    joueur.id=0
+    entraineurDAO.save(joueur)
+
     return nouvelleGame
 }
 // 🔥🌱💧🐞🪨⚪ Variables globales
@@ -47,7 +53,30 @@ val eau = Element(3, "Eau 💧")
 val insecte = Element(4, "Insecte 🐞")
 val roche = Element(5, "Roche 🪨")
 val normal = Element(6, "Normal ⚪")
+
+val listeBaseEspeces = listOf(
+    especeSpringLeaf,
+    especeFlamkip,
+    especeAquamy,
+    espece4,
+    espece5,
+    espece6
+)
+
+
+val db = BDD()
+
+
+//Les DAO
+val entraineurDAO= EntraineurDAO(db)
+val especeDAO = EspeceMonsterDAO(db)
+//Les listes
+val listeEntraineur = entraineurDAO.findAll()
+
+
 fun main() {
+    val spring = especeDAO.save(especeSpringLeaf)
+    val listeEspecesSauvegardees = especeDAO.saveAll(listeBaseEspeces)
  /*   // 🔥 Feu
     feu.forces.addAll(listOf(plante, insecte, roche))
     feu.faiblesses.add(eau)
@@ -84,10 +113,11 @@ fun main() {
     route2.zonePrecedente = route1
     joueur.sacAItems.add(kube1)
 
+
     val partie = nouvellePartie()
     partie.choixStarter()
     partie.jouer()
-
+    db.close()
 //    println(monstre1)
 //    monstre2.attaquer(monstre1)
 //    println(monstre1)
