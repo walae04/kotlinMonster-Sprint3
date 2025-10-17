@@ -1,6 +1,7 @@
 package org.example
 import org.example.DAO.EntraineurDAO
 import org.example.DAO.EspeceMonsterDAO
+import org.example.DAO.IndividuMonstreDAO
 import org.example.dresseur.Entraineur
 import org.example.item.Badge
 import org.example.item.MonsterKube
@@ -11,8 +12,6 @@ import org.example.monstre.Element
 import org.example.monstre.EspeceMonster
 import org.example.monstre.IndividuMonstre
 
-
-
 var joueur = Entraineur(1,"Sacha",100)
 var rival = Entraineur(2,"Regis",200)
 var especeSpringLeaf = EspeceMonster(1,	"Springleaf",	"Arbre",	9,	11	,11,	12	,14,	60,	6.5,9.0,8.0,	7.0,	10.0,	34.0,"Petit monstre espiègle rond comme une graine, adore le soleil.",	"Sa feuille sur la tête indique son humeur.",	"Curieux, amical, timide")
@@ -21,8 +20,28 @@ var especeAquamy = EspeceMonster(7,"Aquamy","nuage",10,11,9,14,14,55,9.0,10.0,7.
 var espece4 = EspeceMonster(8,"Laoumi","Animal",11,10,9,8,11,58,11.0,8.0,7.0,6.0,11.5,23.0,"Petit ourson au pelage soyeux, aime se tenir debout.","Son grognement est mignon mais il protège ses amis.","Affectueux, protecteur, gourmand")
 var espece5 = EspeceMonster(10,"Bugsyface","Insecte",10,13,8,7,13,45,7.0,11.0,6.5,8.0,11.5,21.0,"Insecte à carapace luisante, se déplace par bonds et vibre des antennes.","Sa carapace devient plus dure après chaque mue.","Travailleur, sociable, infatigable")
 var espece6 = EspeceMonster(13,"Galum","Minéral",12,15,6,8,12,55,9.0,13.0,4.0,6.5,10.5,13.0,"Golem ancien de pierre, yeux lumineux en garde.","Peut rester immobile des heures comme une statue.","Sérieux, stoïque, fiable")
+var especeVolspark = EspeceMonster(
+    20,
+    "Volspark",
+    "Souris Électrik",
+    12,
+    8,
+    15,
+    14,
+    10,
+    52,
+    0.5,
+    6.0,
+    45.0,
+    12.0,
+    60.0,
+    0.0,
+    "Petit monstre énergétique qui fait crépiter ses poils quand il est excité.",
+    "Il se recharge en frottant ses pattes sur le sol.",
+    "Curieux, vif, amical"
+)
 
-var route1 = Zone(1,"Zone A",600,mutableListOf(especeSpringLeaf,especeFlamkip,especeAquamy),null,null)
+var route1 = Zone(1,"Zone A",600,mutableListOf(especeSpringLeaf,especeFlamkip,especeAquamy,especeVolspark),null,null)
 var route2 = Zone(2,"Zone B",1000,mutableListOf(espece4,espece5,espece6),null,null)
 
 val monstre1 = IndividuMonstre(1, "springleaf", especeSpringLeaf,null,1500.0)
@@ -31,7 +50,7 @@ val monstre3 = IndividuMonstre(3, "aquamy", especeAquamy,null,1500.0)
 
 val monstreKube= MonsterKube(1,"spring","strong",10.2)
 //val badgePierre= Badge(1,"Badge Roche","Badge gagné lorsque le joueur..."5)
-
+// mon espece:
 
 var kube1 = MonsterKube(1, "le kube", "kube de capture", 50.0)
 
@@ -53,6 +72,7 @@ val eau = Element(3, "Eau 💧")
 val insecte = Element(4, "Insecte 🐞")
 val roche = Element(5, "Roche 🪨")
 val normal = Element(6, "Normal ⚪")
+val electrique = Element(7, "Électrik ")
 
 val listeBaseEspeces = listOf(
     especeSpringLeaf,
@@ -60,9 +80,11 @@ val listeBaseEspeces = listOf(
     especeAquamy,
     espece4,
     espece5,
-    espece6
+    espece6,
+    especeVolspark
 )
 
+val individu1 = IndividuMonstre(0, "Springleaf fort", especeSpringLeaf, joueur, 500.0)
 
 val db = BDD()
 
@@ -70,13 +92,25 @@ val db = BDD()
 //Les DAO
 val entraineurDAO= EntraineurDAO(db)
 val especeDAO = EspeceMonsterDAO(db)
+val individuDAO = IndividuMonstreDAO(db)
+
 //Les listes
 val listeEntraineur = entraineurDAO.findAll()
+
+
+// ⚡ Nouvelle espèce : Volspark
+
+
+
 
 
 fun main() {
     val spring = especeDAO.save(especeSpringLeaf)
     val listeEspecesSauvegardees = especeDAO.saveAll(listeBaseEspeces)
+    // 🔹 Création et sauvegarde des individus
+
+    val individuSauvegarde1 = individuDAO.save(individu1)
+    especeVolspark.elements.add(electrique)
  /*   // 🔥 Feu
     feu.forces.addAll(listOf(plante, insecte, roche))
     feu.faiblesses.add(eau)
